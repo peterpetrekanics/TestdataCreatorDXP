@@ -5,10 +5,14 @@
 	<portlet>
 		<portlet-name>testdata-creator-dxp</portlet-name>
 		<display-name>Testdata Creator Dxp</display-name>
-		<portlet-class>com.test.TestdataCreatorDXP</portlet-class>
+		<portlet-class>com.liferay.controller.TestdataCreatorDXP</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/testdatacreatordxp/view.jsp</value>
+		</init-param>
+		<init-param>
+    		<name>copy-request-parameters</name>
+    		<value>true</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
