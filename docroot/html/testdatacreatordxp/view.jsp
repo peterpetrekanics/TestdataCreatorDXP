@@ -18,7 +18,9 @@
 <%@page import="javax.portlet.RenderRequest"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="javax.portlet.PortletURL"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<liferay-theme:defineObjects />
 <portlet:defineObjects />
 
 Current non-admin user count:
@@ -33,36 +35,16 @@ ____________________________________________
 <b>User related tasks:</b>
 <br>
 <br>
-<portlet:resourceURL var="resourceUrl1">
-	<portlet:param name="portletAction" value="createUsers" />
-</portlet:resourceURL>
 
-<form name="newUserCreatorForm" id="newusers">
-	Enter a name for the new user(s): <input type="text" name="newUserName" />
-	<br> Enter how many users should be created <input type="number"
-		name="newUserCount" onkeypress='return validateQty(event);' min="1"
-		value="5"> <br /> <input type="button" value="Create Users"
-		onclick="callServeResource1()">
-</form>
+<portlet:actionURL var="userCreatorURL" name="userCreatorURL" >
+</portlet:actionURL>
 
-<script type="text/javascript">
-function callServeResource1(){
-    AUI().use('aui-io-request', function(A){
-        A.io.request('<%=resourceUrl1.toString()%>', {
-               method: 'post',
-               form: {
-                   id: 'newusers'
-               },
-               on: {
-                    success: function() {
-                     alert(this.get('responseData'));
-                     location.reload();
-                    }
-               }
-            });
-    });
-}
-</script>
+<aui:form action="${userCreatorURL}">
+	Enter a name for the new user(s):  <aui:input type="text" name="newUserName" value="newUserName"></aui:input>
+	Enter how many users should be created <aui:input type="number" name="newUserCount" value="newUserCount"></aui:input>
+	<aui:input type="submit" name="" value="CreateUsers" ></aui:input>
+</aui:form>
+
 
 -------------------------------
 <br>

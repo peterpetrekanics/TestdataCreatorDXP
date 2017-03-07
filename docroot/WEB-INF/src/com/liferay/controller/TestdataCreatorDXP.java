@@ -18,8 +18,11 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ProcessAction;
 
 //import org.osgi.service.component.annotations.Component;
 //@Component(
@@ -58,14 +61,47 @@ public class TestdataCreatorDXP extends MVCPortlet {
 	long adminUserId;
 	PrintWriter writer;
 	
+@Override
+public void init() throws PortletException {
+	// TODO Auto-generated method stub
+	super.init();
+	// Not needed - this is probably triggered when I add the portlet to a page
+}
+
+@Override
+public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, PortletException {
+	// TODO Auto-generated method stub
+	super.render(arg0, arg1);
+	System.out.println("this runs every time2");
 	
+	// Getting the value for companyId
+			Company company = null;
+			try {
+				company = CompanyLocalServiceUtil.getCompanies().iterator().next();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+			companyId = company.getCompanyId();
+			System.out.println("companyId " + companyId);
 
-	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
-			PortletException {
-		System.out.println("processAction starts..");
+			// Getting the id of the admin user
+			try {
+				adminUser = UserLocalServiceUtil.getUserByEmailAddress(companyId, "test@liferay.com");
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+			adminUserId = adminUser.getUserId();
+			System.out.println("adminUserId " + adminUserId);
+}
 
-		System.out.println("processAction ends..");
-	}
+//	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
+//			PortletException {
+//		System.out.println("processAction starts..");
+//
+//		System.out.println("processAction ends..");
+//	}
 
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
@@ -73,24 +109,7 @@ public class TestdataCreatorDXP extends MVCPortlet {
 		// super.serveResource(resourceRequest, resourceResponse);
 		System.out.println("serveResource starts..");
 
-		// Getting the value for companyId
-		Company company = null;
-		try {
-			company = CompanyLocalServiceUtil.getCompanies().iterator().next();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		companyId = company.getCompanyId();
-
-		// Getting the id of the admin user
-		try {
-			adminUser = UserLocalServiceUtil.getUserByEmailAddress(companyId, "test@liferay.com");
-		} catch (PortalException e) {
-			e.printStackTrace();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		adminUserId = adminUser.getUserId();
+		
 		
 		UserHandlerModel userHandler = new UserHandlerModel();
 
@@ -151,5 +170,19 @@ public class TestdataCreatorDXP extends MVCPortlet {
 		System.out.println("The following button was pressed: " + performAction);
 		
 		System.out.println("serveResource ends..");
+	}
+
+	@ProcessAction(name = "userCreatorURL")
+	public void userCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) {
+		System.out.println("companyId2 " + companyId);
+		String newUserName = ParamUtil.getString(actionRequest, "newUserName");
+		int newUserCount = ParamUtil.getInteger(actionRequest, "newUserCount");
+		System.out.println("new user count: " +newUserCount);
+		System.out.println("new user name: " +newUserName);
+		UserHandlerModel userHandler = new UserHandlerModel();
+		if(newUserCount>0) userHandler.createUser(companyId, adminUserId, newUserName, newUserCount);
+//		resourceResponse.setContentType("text/html");
+//        writer = resourceResponse.getWriter();
+//        writer.println("User creation finished");
 	}
 }

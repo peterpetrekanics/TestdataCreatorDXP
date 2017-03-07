@@ -25,51 +25,51 @@ public class UserHandlerModel {
 			ServiceContext serviceContext = null;
 			
 			System.out.println("testing1");
-//		for (int currentUserNumber = 1; currentUserNumber <= userCount; currentUserNumber++) {
-//			try {
-//				UserLocalServiceUtil.addUser(adminUserId, // creatorUserId,
-//						companyId, // companyId,
-//						false, // autoPassword,
-//						"test", // password1,
-//						"test", // password2,
-//						true, // autoScreenName,
-//						null, // screenName,
-//						newUserName + currentUserNumber + "@liferay.com", // emailAddress,
-//						0L, // facebookId,
-//						null, // openId,
-//						Locale.ENGLISH, // locale,
-//						"Test", // firstName,
-//						null, // middleName,
-//						newUserName + currentUserNumber, // lastName,
-//						0, // prefixId,
-//						0, // suffixId,
-//						true, // male,
-//						1, // birthdayMonth,
-//						1, // birthdayDay,
-//						1977, // birthdayYear,
-//						null, // jobTitle,
-//						null, // groupIds,
-//						null, // organizationIds,
-//						null, // roleIds,
-//						null, // userGroupIds,
-//						false, // sendEmail,
-//						serviceContext); // serviceContext
-//				System.out.println("The user: " + newUserName
-//						+ currentUserNumber + " has been created");
-//
-//			} catch (Exception e) {
-//				System.out.println("exception" + e);
-//				e.printStackTrace();
-//
-//			} finally {
-//				try {
-//					System.out.println("User count after user creation: "
-//							+ getUserCount());
-//				} catch (SystemException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
+		for (int currentUserNumber = 1; currentUserNumber <= userCount; currentUserNumber++) {
+			try {
+				UserLocalServiceUtil.addUser(adminUserId, // creatorUserId,
+						companyId, // companyId,
+						false, // autoPassword,
+						"test", // password1,
+						"test", // password2,
+						true, // autoScreenName,
+						null, // screenName,
+						newUserName + currentUserNumber + "@liferay.com", // emailAddress,
+						0L, // facebookId,
+						null, // openId,
+						Locale.ENGLISH, // locale,
+						"Test", // firstName,
+						null, // middleName,
+						newUserName + currentUserNumber, // lastName,
+						0, // prefixId,
+						0, // suffixId,
+						true, // male,
+						1, // birthdayMonth,
+						1, // birthdayDay,
+						1977, // birthdayYear,
+						null, // jobTitle,
+						null, // groupIds,
+						null, // organizationIds,
+						null, // roleIds,
+						null, // userGroupIds,
+						false, // sendEmail,
+						serviceContext); // serviceContext
+				System.out.println("The user: " + newUserName
+						+ currentUserNumber + " has been created");
+
+			} catch (Exception e) {
+				System.out.println("exception" + e);
+				e.printStackTrace();
+
+			} finally {
+				try {
+					System.out.println("User count after user creation: "
+							+ getUserCount());
+				} catch (SystemException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public void deleteNonAdminUsers(long companyId) {
