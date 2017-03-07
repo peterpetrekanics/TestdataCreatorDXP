@@ -1,10 +1,12 @@
 //Tested, works on Liferay 6.2 EE SP14
 package com.liferay.controller;
 
+import com.liferay.model.SiteHandlerModel;
 import com.liferay.model.UserHandlerModel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
@@ -175,8 +177,8 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 //		System.out.println("companyId2 " + companyId);
 		String newUserName = ParamUtil.getString(actionRequest, "newUserName");
 		int newUserCount = ParamUtil.getInteger(actionRequest, "newUserCount");
-		System.out.println("new user count: " +newUserCount);
-		System.out.println("new user name: " +newUserName);
+		System.out.println("new user count: " + newUserCount);
+		System.out.println("new user name: " + newUserName);
 		UserHandlerModel userHandler = new UserHandlerModel();
 		if(newUserCount>0) userHandler.createUser(companyId, adminUserId, newUserName, newUserCount);
 //		resourceResponse.setContentType("text/html");
@@ -188,7 +190,19 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 	public void userGroupCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) {
 		String newUserGroupName = ParamUtil.getString(actionRequest, "newUserGroupName");
 		int newUserGroupCount = ParamUtil.getInteger(actionRequest, "newUserGroupCount");
-		System.out.println("newUserGroupName: " +newUserGroupName);
-		System.out.println("newUserGroupName: " +newUserGroupCount);
+		System.out.println("newUserGroupName: " + newUserGroupName);
+		System.out.println("newUserGroupName: " + newUserGroupCount);
+	}
+
+	@ProcessAction(name = "pageCreatorURL")
+	public void pageCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		String newPageName = ParamUtil.getString(actionRequest, "newPageName");
+		int newPageCount = ParamUtil.getInteger(actionRequest, "newPageCount");
+		System.out.println("newPageName: " + newPageName);
+		System.out.println("newPageCount: " + newPageCount);
+		long currentSiteOfUser = PortalUtil.getScopeGroupId(actionRequest);
+		System.out.println("currentSiteOfUser " + currentSiteOfUser);
+		SiteHandlerModel siteHandler = new SiteHandlerModel();
+		if(newPageCount>0) siteHandler.createPage(companyId, adminUserId, newPageName, newPageCount);
 	}
 }

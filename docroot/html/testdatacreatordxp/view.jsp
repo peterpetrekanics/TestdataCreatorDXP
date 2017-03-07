@@ -192,5 +192,20 @@ function callServeResource6(){
 </script>
 
 -------------------------------
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
+
+____________________________________________
+<br>
+<b> Creating pages on the current site:</b>
+<br>
+<br>
+
+<portlet:actionURL var="pageCreatorURL" name="pageCreatorURL" >
+</portlet:actionURL>
+
+<aui:form action="${pageCreatorURL}">
+	Enter a name for the new page(s): <aui:input type="text" name="newPageName" value="newPageName"></aui:input>
+	Enter how many pages should be created: <aui:input type="number" name="newPageCount" value="newPageCount"></aui:input>
+	<aui:input type="submit" name="" value="CreatePages" ></aui:input>
+</aui:form>
+
+____________________________________________
