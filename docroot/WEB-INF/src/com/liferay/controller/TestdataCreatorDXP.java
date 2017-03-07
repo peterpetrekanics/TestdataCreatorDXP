@@ -200,9 +200,9 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 		int newPageCount = ParamUtil.getInteger(actionRequest, "newPageCount");
 		System.out.println("newPageName: " + newPageName);
 		System.out.println("newPageCount: " + newPageCount);
-		long currentSiteOfUser = PortalUtil.getScopeGroupId(actionRequest);
-		System.out.println("currentSiteOfUser " + currentSiteOfUser);
+		long currentSiteIdOfUser = PortalUtil.getScopeGroupId(actionRequest);
+		System.out.println("currentSiteOfUser " + currentSiteIdOfUser);
 		SiteHandlerModel siteHandler = new SiteHandlerModel();
-		if(newPageCount>0) siteHandler.createPage(companyId, adminUserId, newPageName, newPageCount);
+		if(newPageCount>0) siteHandler.createPage(companyId, adminUserId, currentSiteIdOfUser, newPageName, newPageCount);
 	}
 }

@@ -20,8 +20,29 @@ import java.util.Locale;
 
 public class SiteHandlerModel {
 
-	public void createPage(long companyId, long adminUserId, String newPageName, int newPageCount) {
-		// TODO Auto-generated method stub
+	public void createPage(long companyId, long adminUserId, long currentSiteIdOfUser, String newPageName, int newPageCount) {
+		ServiceContext serviceContext = new ServiceContext();		
+		for (int currentPageNumber = 1; currentPageNumber <= newPageCount; currentPageNumber++) {
+			try {
+				//Add the page
+				Layout myPage =  LayoutLocalServiceUtil.addLayout(adminUserId, currentSiteIdOfUser, false, 
+				                                        0, "Page" + currentPageNumber, "Page" + currentPageNumber, "Page" + currentPageNumber, 
+				                                        LayoutConstants.TYPE_PORTLET, false, "/page"+currentPageNumber, serviceContext);
+				
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			} finally {
+//				try {
+//					System.out
+//							.println("Site count after site creation: "
+//									+ getSiteCount());
+//				} catch (SystemException e) {
+//					e.printStackTrace();
+//				}
+			}
+			}
 		
 	}
 	
