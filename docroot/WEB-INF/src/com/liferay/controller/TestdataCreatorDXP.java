@@ -63,16 +63,14 @@ public class TestdataCreatorDXP extends MVCPortlet {
 	
 @Override
 public void init() throws PortletException {
-	// TODO Auto-generated method stub
 	super.init();
 	// Not needed - this is probably triggered when I add the portlet to a page
 }
 
 @Override
 public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, PortletException {
-	// TODO Auto-generated method stub
 	super.render(arg0, arg1);
-	System.out.println("this runs every time2");
+//	System.out.println("this runs every time when rendering");
 	
 	// Getting the value for companyId
 			Company company = null;
@@ -82,7 +80,7 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 				e.printStackTrace();
 			}
 			companyId = company.getCompanyId();
-			System.out.println("companyId " + companyId);
+//			System.out.println("companyId " + companyId);
 
 			// Getting the id of the admin user
 			try {
@@ -93,7 +91,7 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 				e.printStackTrace();
 			}
 			adminUserId = adminUser.getUserId();
-			System.out.println("adminUserId " + adminUserId);
+//			System.out.println("adminUserId " + adminUserId);
 }
 
 //	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
@@ -174,7 +172,7 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 
 	@ProcessAction(name = "userCreatorURL")
 	public void userCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) {
-		System.out.println("companyId2 " + companyId);
+//		System.out.println("companyId2 " + companyId);
 		String newUserName = ParamUtil.getString(actionRequest, "newUserName");
 		int newUserCount = ParamUtil.getInteger(actionRequest, "newUserCount");
 		System.out.println("new user count: " +newUserCount);
@@ -184,5 +182,13 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 //		resourceResponse.setContentType("text/html");
 //        writer = resourceResponse.getWriter();
 //        writer.println("User creation finished");
+	}
+
+	@ProcessAction(name = "userGroupCreatorURL")
+	public void userGroupCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) {
+		String newUserGroupName = ParamUtil.getString(actionRequest, "newUserGroupName");
+		int newUserGroupCount = ParamUtil.getInteger(actionRequest, "newUserGroupCount");
+		System.out.println("newUserGroupName: " +newUserGroupName);
+		System.out.println("newUserGroupName: " +newUserGroupCount);
 	}
 }

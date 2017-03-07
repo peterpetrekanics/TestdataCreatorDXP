@@ -76,36 +76,15 @@ ____________________________________________
 <b> Usergroup related tasks:</b>
 <br>
 <br>
-<portlet:resourceURL var="resourceUrl3">
-	<portlet:param name="portletAction" value="createUserGroups" />
-</portlet:resourceURL>
 
-<form name="newUserGroupCreatorForm" id="newUserGroups">
-	Enter a name for the new userGroup(s): <input type="text"
-		name="newUserGroupName" /> <br> Enter how many userGroups should
-	be created <input type="number" name="newUserGroupCount"
-		onkeypress='return validateQty(event);' min="1" value="5"> <br />
-	<input type="button" value="Create UserGroups" onclick="callServeResource3()">
-</form>
+<portlet:actionURL var="userGroupCreatorURL" name="userGroupCreatorURL" >
+</portlet:actionURL>
 
-<script type="text/javascript">
-function callServeResource3(){
-    AUI().use('aui-io-request', function(A){
-        A.io.request('<%=resourceUrl3.toString()%>', {
-               method: 'post',
-               form: {
-                   id: 'newUserGroups'
-               },
-               on: {
-                    success: function() {
-                     alert(this.get('responseData'));
-                     location.reload();
-                    }
-               }
-            });
-    });
-}
-</script>
+<aui:form action="${userGroupCreatorURL}">
+	Enter a name for the new userGroup(s): <aui:input type="text" name="newUserGroupName" value="newUserGroupName"></aui:input>
+	Enter how many userGroups should be created: <aui:input type="number" name="newUserGroupCount" value="newUserGroupCount"></aui:input>
+	<aui:input type="submit" name="" value="CreateUserGroups" ></aui:input>
+</aui:form>
 
 -------------------------------
 <br>
