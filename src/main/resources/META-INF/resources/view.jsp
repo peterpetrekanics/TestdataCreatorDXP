@@ -52,7 +52,6 @@ ____________________________________________
 	<aui:input type="submit" name="" value="CreateUsers" ></aui:input>
 </aui:form>
 
-
 -------------------------------
 <br>
 
@@ -168,44 +167,14 @@ ____________________________________________
 <br>
 <br>
 
+<portlet:actionURL var="siteCreatorURL" name="siteCreatorURL" >
+</portlet:actionURL>
 
-
-<portlet:resourceURL var="resourceUrl6">
-	<portlet:param name="portletAction" value="createSites" />
-</portlet:resourceURL>
-
-
-
-
-<form name="newSiteCreatorForm" id="newsites">
-	Enter a name for the new site(s): <input type="text" name="newSiteName" />
-	<br> Enter how many sites should be created <input type="number"
-		name="newSiteCount" onkeypress='return validateQty(event);' min="1"
-		value="5"> <br /> <input type="button" value="Create Sites"
-		onclick="callServeResource6()">
-</form>
-
-<script type="text/javascript">
-function callServeResource6(){
-    AUI().use('aui-io-request', function(A){
-        A.io.request('<%=resourceUrl6.toString()%>', {
-               method: 'post',
-               form: {
-                   id: 'newsites'
-               },
-               on: {
-                    success: function() {
-                     alert(this.get('responseData'));
-                     location.reload();
-                    }
-               }
-            });
-    });
-}
-</script>
-<br>
--------------------------------
-<br>
+<aui:form action="${siteCreatorURL}">
+	Enter a name for the new site(s): <aui:input type="text" name="newSiteName" value="newSiteName"></aui:input>
+	Enter how many sites should be created: <aui:input type="number" name="newSiteCount" value="newSiteCount"></aui:input>
+	<aui:input type="submit" name="" value="CreateSites" ></aui:input>
+</aui:form>
 ____________________________________________
 <br>
 <b> Creating pages on the current site:</b>

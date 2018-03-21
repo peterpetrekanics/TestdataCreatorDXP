@@ -125,6 +125,7 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 		case "createUserGroups":
 			String newUserGroupName = ParamUtil.getString(resourceRequest, "newUserGroupName");
 			int newUserGroupCount = ParamUtil.getInteger(resourceRequest, "newUserGroupCount");
+			System.out.println("newUserGroupCount: " + newUserGroupCount);
 			if(newUserGroupCount>0) userHandler.createUserGroup(companyId, adminUserId, newUserGroupName, newUserGroupCount);
 			resourceResponse.setContentType("text/html");
 	        writer = resourceResponse.getWriter();
@@ -143,16 +144,6 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 			userHandler.deleteUserGroups(companyId);
 			break;
 			
-		case "createSites":
-			String newSiteName = ParamUtil.getString(resourceRequest, "newSiteName");
-			int newSiteCount = ParamUtil.getInteger(resourceRequest, "newSiteCount");
-			System.out.println("new sites: " + newSiteCount);
-			if(newSiteCount>0) userHandler.createSite(companyId, adminUserId, newSiteName, newSiteCount);
-			resourceResponse.setContentType("text/html");
-	        writer = resourceResponse.getWriter();
-	        writer.println("Site creation finished");
-			break;
-					
 		default:
 			;
 			break;
@@ -182,6 +173,23 @@ public void render(RenderRequest arg0, RenderResponse arg1) throws IOException, 
 		int newUserGroupCount = ParamUtil.getInteger(actionRequest, "newUserGroupCount");
 		System.out.println("newUserGroupName: " + newUserGroupName);
 		System.out.println("newUserGroupName: " + newUserGroupCount);
+	}
+
+//case "createSites":
+//	String newSiteName = ParamUtil.getString(resourceRequest, "newSiteName");
+//	int newSiteCount = ParamUtil.getInteger(resourceRequest, "newSiteCount");
+//	if(newSiteCount>0) userHandler.createSite(companyId, adminUserId, newSiteName, newSiteCount);
+//	resourceResponse.setContentType("text/html");
+//    writer = resourceResponse.getWriter();
+//    writer.println("Site creation finished");
+//	break;
+
+	@ProcessAction(name = "siteCreatorURL")
+	public void siteCreatorURL(ActionRequest actionRequest, ActionResponse actionResponse) {
+		String newSiteName = ParamUtil.getString(actionRequest, "newSiteName");
+		int newSiteCount = ParamUtil.getInteger(actionRequest, "newSiteCount");
+		System.out.println("newSiteName: "+newSiteName);
+		System.out.println("new sites: " + newSiteCount);
 	}
 
 	@ProcessAction(name = "pageCreatorURL")
