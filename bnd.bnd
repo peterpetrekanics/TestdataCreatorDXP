@@ -1,0 +1,4 @@
+Bundle-Name: TestdataCreatorDXP
+Bundle-SymbolicName: TestdataCreatorDXP
+Bundle-Version: 1.0.0
+Export-Package: TestdataCreatorDXP.constants
